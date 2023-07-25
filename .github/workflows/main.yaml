@@ -23,15 +23,14 @@ jobs:
 
       - name: Configure SSH
         run: |
-          pwd
-          ls
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          cat ~/.ssh/id_rsa
           ssh-keyscan 35.201.205.104 >> ~/.ssh/known_hosts
 
-      - name: Deploy to GCE
-        run: scp -r ./dist lcylcy66666@35.201.205.104:/home/lcylcy66666/aiwings/
+      # - name: Deploy to GCE
+      #   run: scp -r ./dist lcylcy66666@35.201.205.104:/home/lcylcy66666/aiwings/
 
-      - name: Reload Nginx on GCE
-        run: ssh lcylcy66666@35.201.205.104 "sudo service nginx reload"
+      # - name: Reload Nginx on GCE
+      #   run: ssh lcylcy66666@35.201.205.104 "sudo service nginx reload"
