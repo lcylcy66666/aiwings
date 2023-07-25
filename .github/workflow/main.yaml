@@ -1,17 +1,32 @@
-# .github/workflows/main.yml
+name: Deploy to GCE
 
-name: CI for Main Branch
 on:
   push:
     branches:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Add other steps for testing, building, and deploying as needed
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build web_ui
+        run: npm run build
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan 35.201.205.104 >> ~/.ssh/known_hosts
+
+      - name: Deploy to GCE
+        run: |
+          scp -r ./dist lcylcy66666@35.201.205.104:/home/lcylcy66666/aiwings/web_ui/
+
