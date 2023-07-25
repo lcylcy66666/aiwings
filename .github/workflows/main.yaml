@@ -20,7 +20,9 @@ jobs:
       #   run: cd aiwings/web_ui
 
       - name: Install dependencies
-        run: cd aiwings/web_ui & npm install
+        run:  npm install
+        working-directory: aiwings/web_ui
+
 
       - name: Build web_ui
         run: npm run build
