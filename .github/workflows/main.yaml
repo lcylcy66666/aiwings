@@ -28,7 +28,8 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           cat ~/.ssh/id_rsa
           ssh-keyscan 35.201.205.104 >> ~/.ssh/known_hosts
-
+      - name: test GCE
+        run: pwd
       # - name: Deploy to GCE
       #   run: scp -r ./dist lcylcy66666@35.201.205.104:/home/lcylcy66666/aiwings/
 
