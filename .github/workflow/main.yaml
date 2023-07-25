@@ -1,0 +1,17 @@
+# .github/workflows/main.yml
+
+name: CI for Main Branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Add other steps for testing, building, and deploying as needed
