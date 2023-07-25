@@ -13,13 +13,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # - name: Install dependencies
-      #   run: npm install
-      #   working-directory: ./web_ui
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      # - name: Build web_ui
-      #   run: npm run build
-      #   working-directory: ./web_ui
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./web_ui
+
+      - name: Build web_ui
+        run: npm run build
+        working-directory: ./web_ui
 
       - name: Configure SSH
         run: |
@@ -29,8 +34,8 @@ jobs:
           cat ~/.ssh/id_rsa
           ssh-keyscan 35.201.205.104 >> ~/.ssh/known_hosts
 
-      # - name: Deploy to GCE
-      #   run: scp -r ./dist lcylcy66666@35.201.205.104:/home/lcylcy66666/aiwings/
+      - name: Deploy to GCE
+        run: scp -r ./dist lcylcy66666@35.201.205.104:/home/lcylcy66666/aiwings/
 
-      # - name: Reload Nginx on GCE
-      #   run: ssh lcylcy66666@35.201.205.104 "sudo service nginx reload"
+      - name: Reload Nginx on GCE
+        run: ssh lcylcy66666@35.201.205.104 "sudo service nginx reload"
