@@ -1,18 +1,28 @@
 <template>
-  <div>
-    <stream1/>
+  <div class="container">
+    <stream/>
   </div>
 </template>
 
 <script>
-import stream1 from '../components/Stream/Stream1.vue'
+import stream from '../components/Stream/Stream.vue'
 export default {
   components: {
-    stream1
+    stream
   }
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.container {
+  height: 100vh;
+  background-image: url(../assets/live-stream.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>
+
