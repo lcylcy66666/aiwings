@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         run:  pwd & npm install
-        working-directory: aiwings/web_ui
+        working-directory: ./web_ui
 
 
       - name: Build web_ui
