@@ -13,15 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up SSH agent
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
-          ssh-keyscan 35.201.205.104 >> ~/.ssh/known_hosts
-
       - name: Install dependencies
         run: npm install
         working-directory: ./web_ui
@@ -29,6 +20,14 @@ jobs:
       - name: Build web_ui
         run: npm run build
         working-directory: ./web_ui
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          cat ~/.ssh/id_rsa
+          ssh-keyscan 35.201.205.104 >> ~/.ssh/known_hosts
 
       - name: Deploy to GCE
         run: scp -r ./dist lcylcy66666@35.201.205.104:/home/lcylcy66666/aiwings/
