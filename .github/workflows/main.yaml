@@ -15,12 +15,12 @@ jobs:
 
       - name: Check position
         run: pwd
-        
+
       # - name: Change working directory to your project root
       #   run: cd aiwings/web_ui
 
       - name: Install dependencies
-        run: npm install
+        run: cd aiwings/web_ui & npm install
 
       - name: Build web_ui
         run: npm run build
