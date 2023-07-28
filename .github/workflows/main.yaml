@@ -29,8 +29,10 @@ jobs:
           cat ~/.ssh/id_rsa
           ssh-keyscan 35.201.205.104 >> ~/.ssh/known_hosts
 
-      # - name: Deploy to GCE
-        # run: scp -r ./dist lcylcy66666@35.201.205.104:/home/lcylcy66666/aiwings/
+      - name: Deploy to GCE
+        run: scp -r ./dist lcylcy66666@35.201.205.104:/home/lcylcy66666/aiwings/
 
       - name: Reload Nginx on GCE
         run: ssh lcylcy66666@35.201.205.104 "sudo service nginx reload"
+
+        # branch 1 test
