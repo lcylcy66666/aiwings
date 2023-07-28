@@ -35,4 +35,3 @@ jobs:
       - name: Reload Nginx on GCE
         run: ssh lcylcy66666@35.201.205.104 "sudo service nginx reload"
 
-        # branch 1 test
